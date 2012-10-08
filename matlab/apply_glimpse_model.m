@@ -41,6 +41,6 @@ save(TMP_IMG, 'IMAGE', '-v6');
 CMD = [SCRIPT_PATH, ' ', MODEL_NAME, ' ', TMP_IMG];
 [status, result] = system(CMD);
 if status ~= 0
-  error('petacat:apply_glimpse_model:glimpse_error', 'Error running Glimpse model');
+  error('petacat:apply_glimpse_model:glimpse_error', ['Error running Glimpse model: ' result]);
 end
 DVALUE = str2num(result);
