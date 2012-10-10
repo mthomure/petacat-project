@@ -1,0 +1,109 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red108\green108\blue108;\red0\green0\blue0;\red16\green73\blue188;
+\red11\green99\blue18;\red84\green0\blue3;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0\b\fs24 \cf2 From: 
+\b0 \cf3 cenek@cecs.pdx.edu\
+
+\b \cf2 Subject: 
+\b0 \cf3 ... got a workaround.\
+
+\b \cf2 Date: 
+\b0 \cf3 June 13, 2012 2:28:10 PM PDT\
+
+\b \cf2 To: 
+\b0 \cf3 Melanie Mitchell <mm@cs.pdx.edu>\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf3 \
+\pard\pardeftab720
+\cf3 Melanie,\
+\
+if the following files are compiles manually, but not linked/loaded, then both segmentation and multiscale segmentations work. I tested the following and unless you want to use some special switch in the segmentation code, all functions in README.txt file work.\
+\
+in MatLab:\
+mex -largeArrayDims mex_constraint_classes.cpp\
+mex -largeArrayDims cimgnbmap.cpp\
+mex -largeArrayDims cimgnbmap_lower.cpp\
+mex -largeArrayDims mex_affinity_option.cpp\
+mex -largeArrayDims mex_neighborW.cpp\
+mex -largeArrayDims mex_computeRowSum.cpp\
+mex -largeArrayDims spmtimesd.cpp\
+mex -largeArrayDims mex_projection_QR_symmetric.cpp\
+mex -largeArrayDims mex_normalizeColumns.cpp\
+mex -largeArrayDims mex_extractMaxima.cpp\
+mex -largeArrayDims mex_XindicatorTimesX.cpp\
+mex -largeArrayDims affinityic.cpp\
+mex -largeArrayDims sparsifyc.cpp\
+mex -largeArrayDims mex_w_times_x_symmetric.cpp\
+\
+I will swing by your office to make sure you are up and running as well.\
+\
+Martin\
+\
+\
+\
+Quoting Melanie Mitchell <mm@cs.pdx.edu>:\
+\
+\pard\pardeftab720
+\cf4 Are you getting something like this:\
+\
+	Error: compilation of /affinityic.cpp failed : ld: can't open -exported_symbols_list file: /extern/lib/maci64/mexFunction.map\
+	collect2: ld returned 1 exit status\
+\
+\'a0\'a0\'a0		mex: link of ' "affinityic.mexmaci64"' failed.\
+\
+?\
+\
+The link "/extern/lib/maci64/mexFunction.map" should be, at least on my machine, "/Applications/MATLAB_R2011b.app/extern/lib/maci64/mexFunction.map"\
+\
+I tried editing ~/.mexopts.sh and changing "TMW_ROOT" to point to "/Applications/MATLAB_R2011b.app" \'a0but that doesn't' seem to affect anything.\
+\
+Let me know if you make progress, and/or if you want to try working on my machine (with sudo privilege).\
+\
+Melanie\
+\
+\
+\
+On Jun 13, 2012, at 12:58 PM, cenek@cecs.pdx.edu wrote:\
+\
+\pard\pardeftab720
+\cf5 I'm not a sudo user on Fuji, so I had a workaround:\
+\
+mkdir ~/.matlab/bin\
+\
+ln -s /usr/bin/gcc-4.3 ~/.matlab/bin/gcc\
+\
+fix path:\
+printf "setenv('PATH',sprintf('/home/%%s/.matlab/bin:%%s',getenv('USER'),getenv('PATH')));\\n"\
+\
+\
+Now, I'm getting a loader error.\
+\
+Martin\
+\
+\
+\
+Quoting Melanie Mitchell <mm@cs.pdx.edu>:\
+\
+\pard\pardeftab720
+\cf6 I installed gcc-4.2 and changed the "CC=gcc" and "CXX=g++" to the right files. \'a0Now I am getting a new error where it can't find "float.h". \'a0Evidently this is a problem with Apple Xcode -- I'm tracking this down now. \'a0Will let you know what I find.\
+\
+Melanie\
+\
+\
+\pard\pardeftab720
+\cf5 \
+\
+\
+\
+\pard\pardeftab720
+\cf4 \
+\
+\pard\pardeftab720
+\cf3 \
+\
+\
+\
+}
