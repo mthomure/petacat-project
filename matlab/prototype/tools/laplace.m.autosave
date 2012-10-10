@@ -1,0 +1,20 @@
+function [pdf,cdf] = laplace(x,mu,b)
+
+% [pdf,cdf] = laplace(x,mu,b);
+
+    if ~exist('x')  || isempty(x),      x = linspace( -10,10,101 ); end
+    if ~exist('mu') || isempty(mu),     mu = 0;                     end
+    if ~exist('b')  || isempty(b),      b = 1;                      end
+
+    pdf = 1/(2*b) * exp( -1 *  abs(x-mu) / b );
+    % cdf = ( cumsum(diff(x).*pdf(1:end-1)) + cumsum(diff(x).*pdf(2:end)) ) / 2;
+    
+    F = @(x,mu,b) .5 * (1 + sign(x-mu)*(1 - exp(-1*abs(x-mu)/b)));
+    
+    F_inv = mu - b * sign( x - .5 ) * 
+    
+end
+    
+    
+    
+    
