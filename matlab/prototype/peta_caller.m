@@ -67,7 +67,7 @@ function results = iterated_caller()
     % for mi = 2
         
         tic;
-        if exist('pc','var'), clear pc; end
+        % if exist('pc','var'), clear pc; end
         
         % select file and method
             fname = fname_list{fi};
@@ -89,7 +89,7 @@ function results = iterated_caller()
             intersection_data{fi,mi} = pc.intersection;
             results{mi} = [results{mi}; pc.results];
             save(sprintf('pc_f_%d_m_%s',fi,method),'pc');
-            % clear pc;
+            clear pc;
 
             fprintf('%.3f, %s, %s\n',toc,method,fname);
         
@@ -107,5 +107,7 @@ function results = iterated_caller()
         fprintf('  TN: %3d\n',sum(eq(results{i}(:),4)));
         fprintf('\n\n');
     end
+    
+    save('2012.10.10_data.mat');
     
 end

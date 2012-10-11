@@ -23,7 +23,13 @@ PETACAT_HOME = fullfile(fileparts(mfilename('fullpath')), '..');
 SCRIPT_PATH = fullfile(PETACAT_HOME, 'glimpse', 'bin', 'train-model.sh');
 
 % Run Glimpse model, and check for errors.
-CMD = [SCRIPT_PATH, ' ', MODEL_NAME, ' ', POS_DIR, ' ', NEG_DIR, ' ', NUM_PROTOTYPES];
+if ~exist('NUM_PROTOTYPES','var') || isempty(NUM_PROTOTYPES)
+    % just use the train-model.sh default
+    CMD = [SCRIPT_PATH, ' ', MODEL_NAME, ' ', POS_DIR, ' ', NEG_DIR ];
+else
+    CMD = [SCRIPT_PATH, ' ', MODEL_NAME, ' ', POS_DIR, ' ', NEG_DIR, ' ', NUM_PROTOTYPES];
+end
+
 display(CMD)
 [status, result] = system(CMD);
 if status ~= 0
